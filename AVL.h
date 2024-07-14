@@ -48,7 +48,9 @@ int node_count_avl(AVL *avl);
 int node_count_aux(AVLNode *root);
 int get_size_val(AVL *avl);
 int is_empty_avl(AVL *avl);
-
-
+AVLNode *rebalance_left(AVLNode *root);
+AVLNode *rebalance_right(AVLNode *root);
+AVLNode *rotate_left(AVLNode *root);
+AVLNode *rotate_right(AVLNode *root);
 
 #endif
