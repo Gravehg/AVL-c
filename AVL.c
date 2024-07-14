@@ -168,3 +168,65 @@ int find_aux_avl(AVLNode *root, int element){
         return find_aux_avl(root->right, element);
     }
 }
+
+int height_avl(AVL *avl){
+    return height_aux_avl(avl->root);
+}
+
+int height_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return 0;
+    int left_height = height_aux_avl(root->left);
+    int right_height = height_aux_avl(root->right);
+    if(left_height > right_height){
+        return 1 + left_height;
+    }else{
+        return 1 + right_height;
+    }
+}
+
+
+void clear_avl(AVL *avl){
+    clear_aux_avl(avl->root);
+    avl->size = 0;
+}
+void clear_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return;
+    clear_aux_avl(root->left);
+    clear_aux_avl(root->right);
+    free(root);
+}
+
+void free_avl(AVL *avl){
+    clear_avl(avl);
+    free(avl);
+    avl = NULL;
+}
+
+int internal_count_avl(AVL *avl){
+    return internal_count_aux_avl(avl->root);
+}
+
+int internal_count_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return 0;
+    if(is_leaf_avl(root))
+        return 0;
+    return 1 + internal_count_aux_avl(root->left) + internal_count_aux_avl(root->right);
+}
+
+int leaf_count_avl(AVL *avl){
+    return leaf_count_aux_avl(avl->root);
+}
+
+int leaf_count_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return 0;
+    if(is_leaf_avl(root))
+        return 1;
+    return 0 + leaf_count_aux_avl(root->left) + leaf_count_aux_avl(root->right);
+}
+
+
+
