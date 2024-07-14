@@ -228,5 +228,23 @@ int leaf_count_aux_avl(AVLNode *root){
     return 0 + leaf_count_aux_avl(root->left) + leaf_count_aux_avl(root->right);
 }
 
+int node_count_avl(AVL *avl){
+    return node_count_aux(avl->root);
+}
+
+int node_count_aux(AVLNode *root){
+    if(root == NULL)
+        return 0;
+    return 1 + node_count_aux(root->left) + node_count_aux(root->right);
+}
+
+int get_size_val(AVL *avl){
+    return avl->size;
+}
+
+int is_empty_avl(AVL *avl){
+    return avl->size == 0;
+}
+
 
 
