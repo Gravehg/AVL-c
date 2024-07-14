@@ -247,4 +247,48 @@ int is_empty_avl(AVL *avl){
 }
 
 
+AVLNode *rebalance_left(AVLNode *root){
+    int left_height = height_aux_avl(root->left);
+    int right_height = height_aux_avl(root->right);
+    if(left_height - right_height > 1){
+        int left_left_height = height_aux_avl(root->left->left);
+        int left_right_height = height_aux_avl(root->left->right);
+        if(left_left_height >= left_right_height){
+            return rotate_right(root);
+        }else{
+            root->left = rotate_left(root->left);
+            return rotate_right(root);
+        }
+    }
+    return root;
+}
+AVLNode *rebalance_right(AVLNode *root){
+    int left_height = height_aux_avl(root->left);
+    int right_height = height_aux_avl(root->right);
+    if(left_height - right_height > 1){
+        int right_left_height = height_aux_avl(root->right->left);
+        int right_right_height = height_aux_avl(root->right->right);
+        if(right_right_height >= right_left_height){
+            return rotate_left(root);
+        }else{
+            root->right = rotate_right(root->right);
+            return rotate_left(root);
+        }
+    }
+    return root;
+}
+
+AVLNode *rotate_left(AVLNode *root){
+    AVLNode *temp = root->right;
+    root->right = temp->left;
+    temp->left = root;
+    return temp;
+}
+AVLNode *rotate_right(AVLNode *root){
+    AVLNode *temp = root->left;
+    root->left = temp->right;
+    temp->right = root;
+    return temp;
+}
+
 
