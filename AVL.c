@@ -133,3 +133,38 @@ void postorder_aux_avl(AVLNode *root){
     postorder_aux_avl(root->right);
     printf("%i,", root->element);
 }
+
+int contains_avl(AVL *avl, int element){
+    return contains_aux(avl->root, element);
+}
+
+int contains_aux(AVLNode *root, int element){
+    if(root == NULL)
+        return 0;
+    if(root->element == element)
+        return 1;
+    if(element > root->element){
+        return contains_aux(root->right, element);
+    }else if(element < root->element){
+        return contains_aux(root->left, element);
+    }
+}
+
+int find_avl(AVL *avl, int element){
+    return find_aux_avl(avl->root, element);
+}
+
+int find_aux_avl(AVLNode *root, int element){
+    if(root == NULL){
+        printf("%s\n", "Could not locate element in AVL data structure");
+        exit(EXIT_FAILURE);
+    }
+    if(root->element == element){
+        return root->element;
+    }
+    if(element < root->element){
+        return find_aux_avl(root->left, element);
+    }else if (element > root->element){
+        return find_aux_avl(root->right, element);
+    }
+}
