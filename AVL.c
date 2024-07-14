@@ -90,3 +90,46 @@ int node_children_count(AVLNode *root){
 AVLNode *get_unique_child_avl(AVLNode *root){
     return root->left == NULL ? root->right : root->left;
 }
+
+
+void preorder_avl(AVL *avl){
+    printf("%s", "[");
+    preorder_aux_avl(avl->root);
+    printf("%s\n", "]");
+}
+
+void inorder_avl(AVL *avl){
+    printf("%s", "[");
+    inorder_aux_avl(avl->root);
+    printf("%s\n", "]");
+}
+
+void postorder_avl(AVL *avl){
+    printf("%s", "[");
+    postorder_aux_avl(avl->root);
+    printf("%s\n", "]");
+}
+
+void preorder_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return;
+    printf("%i,", root->element);
+    preorder_aux_avl(root->left);
+    preorder_aux_avl(root->right);
+}
+
+void inorder_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return;
+    inorder_aux_avl(root->left);
+    printf("%i,", root->element);
+    inorder_aux_avl(root->right);
+}
+
+void postorder_aux_avl(AVLNode *root){
+    if(root == NULL)
+        return;
+    postorder_aux_avl(root->left);
+    postorder_aux_avl(root->right);
+    printf("%i,", root->element);
+}
